@@ -1,7 +1,9 @@
 # SI-206-Final-Project
 
 group name: The Powerful Jokers :)
+
 Members: Jingcong Hu, Yuan Shi
+
 Using: 
 1. New York Times (API)
 2. iTunes (API)
