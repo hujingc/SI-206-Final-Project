@@ -1,26 +1,28 @@
 # SI-206-Final-Project
 
-group name: The Powerful Jokers :)
+What is your group's name?
+The Powerful Jokers
 
-Members: Jingcong Hu, Yuan Shi
+Who are you working with? 
+Jingcong Hu
+Yuan Shi
 
-Using: 
-1. New York Times (API)
-2. iTunes (API)
+What websites/APIs will you be gathering data from?
+iTunes website/API
+New York Times website/API
 
-Collecting data on:
-1. Top Stories
-2. (undecided)
+What data will you collect from each website/API and store in a database?
+Collecting data from the Apple Music API
+Collecting data from the Top Stories section
 
 What data will you be calculating from the data in the database?
-1.
-2.
+albums, artists, song
+Title, subject, author, date published, if specific words are in the article
 
 What visualization tools will you be using?
-1.
-2.
+Both: Plotly
 
 What graphs/charts will you be creating?
-1.
-2.
+Pie chart
+Bar graph
 

@@ -1,8 +1,0 @@
-"""def write_cache(cache_file, cache_dict):
-    """
-    This function writes the dictionary into a JSON file to save the cached dictionary
-    """
-    dumped_json_cache = json.dumps(cache_dict) # serialize dictionary to a JSON formatted string 
-    fw = open(cache_file,"w") # open the cache file
-    fw.write(dumped_json_cache) # write the JSON
-    fw.close() # Close the open file"""
