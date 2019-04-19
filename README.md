@@ -23,5 +23,7 @@ What visualization tools will you be using?
 Both: Plotly
 
 What graphs/charts will you be creating?
-Word cloud about the subjects that the news mention
+Word cloud about the subjects that the news mention from BBC
 Pie charts about the section the news is from (world, US, science, etc.)
+Compare with news from NYT's 
+arts, automobiles, books, business, fashion, food, health, home, insider, magazine, movies, national, nyregion, obituaries, opinion, politics, realestate, science, sports, sundayreview, technology, theater, tmagazine, travel, upshot, world
