@@ -32,7 +32,6 @@ cur.execute('DROP TABLE IF EXISTS News')
 cur.execute('CREATE TABLE News (news_id TEXT, title TEXT, author TEXT, time_posted TIMESTAMP, news_text TEXT)')
 # Use a for loop, the cursor you defined above to execute INSERT statements
 for news in res['articles']:
-    # print(tweet)
     _news_id = news['source']['id']
     _title = news['title']
     _author = news['author']
