@@ -17,11 +17,12 @@ res=r.json()
 cur.execute('SELECT COUNT(*) FROM NYTHome')
 count = cur.fetchall()
 start=count[0][0]
-
+print(count)
+print(start)
 for news in res['results'][start:start+20]:
         _title = news['title']
         _author = news['byline'][3:]
         _published = news['published_date']
         _section = news['section']
-        cur.execute('INSERT INTO NYT (title, author, published, section) VALUES (?, ?, ?, ?)',(_title, _author, _published, _section))
+        cur.execute('INSERT INTO NYTHome (title, author, published, section) VALUES (?, ?, ?, ?)',(_title, _author, _published, _section))
 conn.commit()
