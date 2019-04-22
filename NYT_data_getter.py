@@ -3,40 +3,25 @@
 import json
 import csv
 import requests
+import sqlite3
 
+AppID = 'af9fbb82-d750-4fd6-a708-d01cd0fae0ec'
+APIKEY='KIBl6ffb7lJrM6UAdpiOwAms0ppqvNf2'
 APISecret='zkt6V2HOt9XyBL0G'
-api = 'KIBl6ffb7lJrM6UAdpiOwAms0ppqvNf2'
-total=0
-# subjects=['arts', 'automobiles', 'books', 'business', 'fashion',\
-#      'food', 'health', 'home', 'insider', 'magazine', \
-#         'movies', 'national', 'opinion', 'politics',\
-#     'realestate',  'sports', 'sundayreview','theater', 'tmagazine',\
-#          'travel']
-#          'world','science', 'technology', 
-r=requests.get('https://api.nytimes.com/svc/topstories/v2/arts.json?api-key='+api+'?limit=20')
-res=r.json()
-dumped_json_cache = json.dumps(res)
-fw = open('test.json',"w")
-fw.write(dumped_json_cache)
-fw.close()
-for result in res['results']:
-    total+=1
-    print(result['title'])
-print(total)
-
 conn = sqlite3.connect('news.sqlite')
 cur = conn.cursor()
-cur.execute('CREATE TABLE IF NOT EXISTS NYT (section TEXT, title TEXT, author TEXT, time_posted TIMESTAMP, news_text TEXT)')
-for news in res['results']:
-    for x in range(20):
-        _title = news['title']
-        _author = news['byline'][3:]
-        _published = news['created_date']
-        _section = news['section']
-        cur.execute('INSERT INTO NYT (title, author, published, section) VALUES (?, ?, ?, ?, ?)',
-                 (_title, _author, _published, _section))
-conn.commit()
-#  Use the database connection to commit the changes to the database
+cur.execute('CREATE TABLE IF NOT EXISTS NYT (title TEXT, author TEXT, published TIMESTAMP, section TEXT)')
+
+subjects=['arts', 'business','health', 'world','science', 'technology']
+for sub in subjects:
+        r=requests.get('https://api.nytimes.com/svc/topstories/v2/'+sub+'.json?api-key='+APIKEY)
+        res=r.json()
+        for news in res['results'][:20]:
+                _title = news['title']
+                _author = news['byline'][3:]
+                _published = news['published_date']
+                _section = news['section']
+                cur.execute('INSERT INTO NYT (title, author, published, section) VALUES (?, ?, ?, ?)',(_title, _author, _published, _section))
 conn.commit()
 
 
