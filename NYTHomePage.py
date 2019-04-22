@@ -17,7 +17,6 @@ res=r.json()
 cur.execute('SELECT COUNT(*) FROM NYTHome')
 count = cur.fetchall()
 start=count[0][0]
-print(count)
 print(start)
 for news in res['results'][start:start+20]:
         _title = news['title']
