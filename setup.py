@@ -9,8 +9,8 @@ import sqlite3
 api_key = '3014e68bd7bd4196903e79989e41a196'
 conn = sqlite3.connect('news.sqlite')
 cur = conn.cursor()
-cur.execute('DROP TABLE IF EXISTS News')
-cur.execute('CREATE TABLE News (news_name TEXT, title TEXT, author TEXT, time_posted TIMESTAMP, news_text TEXT, subject TEXT)')
+# cur.execute('DROP TABLE IF EXISTS News')
+cur.execute('CREATE TABLE IF NOT EXISTS News (news_name TEXT, title TEXT, author TEXT, time_posted TIMESTAMP, news_text TEXT, subject TEXT)')
 
 subjects=['business','sports','entertainment','science', 'technology']
 for sub in subjects:
@@ -19,7 +19,7 @@ for sub in subjects:
     cur.execute('SELECT COUNT(*) FROM News')
     count = cur.fetchall()
     start=count[0][0]
-    for news in res['articles'][:20]:
+    for news in res['articles'][start:start+4]:
         _news_name = news['source']['name']
         _title = news['title']
         _author = news['author']
