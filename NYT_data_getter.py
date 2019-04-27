@@ -14,21 +14,29 @@ cur.execute(
     'CREATE TABLE IF NOT EXISTS NYT (title TEXT, author TEXT, published TIMESTAMP, section TEXT)')
 
 # count how many rows are in the table
-cur.execute('SELECT COUNT(*) FROM NYTHome')
+cur.execute('SELECT COUNT(*) FROM NYT')
 count = cur.fetchall()
 start = count[0][0]
-
+print(start)
 # this part is so I don't have to run the file 5 times
 subjects = ['business', 'health', 'world', 'science', 'technology']
 for sub in subjects:
     r = requests.get(
         'https://api.nytimes.com/svc/topstories/v2/'+sub+'.json?api-key='+APIKEY)
     res = r.json()
-    for news in res['results'][:20]:
+    num=0
+    for news in res['results']:
         _title = news['title']
         _author = news['byline'][3:]
         _published = news['published_date']
         _section = news['section']
-        cur.execute('INSERT INTO NYT (title, author, published, section) VALUES (?, ?, ?, ?)',
-                    (_title, _author, _published, _section))
+        cur.execute("SELECT title FROM NYT WHERE title = ? LIMIT 1", (_title,) )
+        if (num<4) and (cur.fetchone()==None):
+            num=num+1
+            cur.execute('INSERT INTO NYT (title, author, published, section) VALUES (?,?,?,?)',(_title, _author, _published, _section))
+        
 conn.commit()
+cur.execute('SELECT COUNT(*) FROM NYT')
+count = cur.fetchall()
+end = count[0][0]
+print(end)
