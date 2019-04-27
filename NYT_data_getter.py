@@ -17,12 +17,6 @@ cur = conn.cursor()
 cur.execute(
     'CREATE TABLE IF NOT EXISTS NYT (title TEXT, author TEXT, published TIMESTAMP, section TEXT)')
 
-# count how many rows are in the table, delete later
-cur.execute('SELECT COUNT(*) FROM NYT')
-count = cur.fetchall()
-start = count[0][0]
-print(start)
-
 #subjects to use
 subjects = ['business', 'health', 'world', 'science', 'technology']
 stories=0
@@ -43,8 +37,7 @@ def usability():
         if totals[sub]<20:
             return False
     return True
-leastStories=sorted(totals.items(),key=lambda x:x[1])[0][1]
-print(leastStories)
+
 #if the file can be ran 5 times, get an equal distribution of stories
 if usability():
     for sub in subjects:
@@ -66,6 +59,7 @@ else:
     #equal distribution of stories is not possible
     print('One section has insufficient number of stories. File cannot be ran 5 times')
     print("Database will not have an equal number of stories from each section")
+    leastStories=sorted(totals.items(),key=lambda x:x[1])[0][1]
     diff=100-(leastStories*5)
     num=0
     for sub in subjects:
