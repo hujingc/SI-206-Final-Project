@@ -34,3 +34,5 @@ conn.commit()
 cur.execute('SELECT COUNT(*) FROM News')
 count = cur.fetchall()
 end = count[0][0]
+
+
