@@ -24,5 +24,4 @@ Both: Plotly
 
 What graphs/charts will you be creating?
 Word cloud about the subjects that the news mention from BBC (for fun)
-Pie charts about the section the news is from (world, US, science, etc.)
-Bar graph about what which of the news from BBC matches what's from NYT's sections (arts, business, fashion, food, health, home, insider, magazine, movies, national, nyregion, obituaries, opinion, politics, realestate, science, sports, technology, theater, travel, upshot, world)
+Bar graph of most popular subjects in NYT for each section
