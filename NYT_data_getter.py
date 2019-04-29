@@ -18,7 +18,7 @@ cur.execute(
     'CREATE TABLE IF NOT EXISTS NYT (title TEXT, author TEXT, published TIMESTAMP, section TEXT)')
 
 #subjects to use
-subjects = ['business', 'health', 'world', 'science', 'technology']
+subjects = ['Business', 'Health', 'World', 'Science', 'Technology']
 stories=0
 totals={}
 
@@ -49,7 +49,7 @@ if usability():
             _title = news['title']
             _author = news['byline'][3:]
             _published = news['published_date']
-            _section = news['section']
+            _section = sub
             cur.execute("SELECT title FROM NYT WHERE title = ? LIMIT 1", (_title,) )
             if (num<4) and (cur.fetchone()==None):
                 num=num+1
@@ -71,17 +71,17 @@ else:
             _title = news['title']
             _author = news['byline'][3:]
             _published = news['published_date']
-            _section = news['section']
+            _section = sub
             cur.execute('INSERT INTO NYT (title, author, published, section) VALUES (?,?,?,?)',(_title, _author, _published, _section))
     for sub in subjects:
         r = requests.get(
             'https://api.nytimes.com/svc/topstories/v2/'+sub+'.json?api-key='+APIKEY)
         res = r.json()
-        for news in res['results'][:leastStories]:
+        for news in res['results']:
             _title = news['title']
             _author = news['byline'][3:]
             _published = news['published_date']
-            _section = news['section']
+            _section = sub
             cur.execute("SELECT title FROM NYT WHERE title = ? LIMIT 1", (_title,) )
             if (num<diff) and (cur.fetchone()==None):
                 num=num+1
